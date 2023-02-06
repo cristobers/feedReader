@@ -12,7 +12,7 @@ def createDatabase():
 
 def main():
     if not DatabaseExists():
-        createDatabase().execute("CREATE TABLE articles(articleTitle PRIMARY KEY, webpageTitle, image, summary, link, published)")
+        createDatabase().execute("CREATE TABLE articles(articleTitle PRIMARY KEY, webpageTitle, image, summary, link, dayPublished DATE, timePublished TIME)")
         return
     print("feeds.db already exists")
 

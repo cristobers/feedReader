@@ -1,3 +1,6 @@
 http://feeds.arstechnica.com/arstechnica/index/
 http://feeds.bbci.co.uk/news/technology/rss.xml
 https://hnrss.org/frontpage
+http://feeds.bbci.co.uk/news/rss.xml
+https://feeds.skynews.com/feeds/rss/entertainment.xml
+https://xkcd.com/rss.xml
