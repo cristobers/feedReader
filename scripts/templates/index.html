@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--<h1>feedReader - RSS Feed Reader</h1>-->
+        <title>feedReader - RSS Feed Reader</title>
+        <style>
+            a {
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: none;
+            }
+
+            .articles {
+                margin: auto;
+                border: 2px solid black;
+                background: #66B2FF;
+                padding: 2%;
+                width: 80%;
+            }
+        </style>
+    </head>
+    <body>
+        {% for item in articles %}
+        <div class="articles">
+            <a href ="{{ item[4] }}">{{ item[0] }}</a>
+            <br>
+            <a> {{ item[5] }} - </a>
+            <a> {{ item[1] }}   </a> 
+        </div>
+        <br>
+        {% endfor %}
+    </body>
+</html>
