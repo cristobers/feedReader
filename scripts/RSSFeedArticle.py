@@ -24,5 +24,5 @@ class FeedArticle:
         return date
 
     def timePublished(self):
-        time = f"{self.article.updated_parsed.tm_hour}:{str(self.article.updated_parsed.tm_min).zfill(2)}:{str(self.article.updated_parsed.tm_sec).zfill(2)}"
+        time = f"{str(self.article.updated_parsed.tm_hour).zfill(2)}:{str(self.article.updated_parsed.tm_min).zfill(2)}:{str(self.article.updated_parsed.tm_sec).zfill(2)}"
         return time
