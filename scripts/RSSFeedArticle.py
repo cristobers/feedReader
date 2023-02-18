@@ -1,4 +1,3 @@
-from datetime import datetime
 
 class FeedArticle:
     def __init__(self, article):

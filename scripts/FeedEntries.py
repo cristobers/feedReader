@@ -8,7 +8,10 @@ class Feed:
     
     def __init__(self, url):
         self.url = url
-        self.feed = feedparser.parse(url)
+        try:
+            self.feed = feedparser.parse(url)
+        except Exception as e:
+            print(f"An error occured when trying to gather articles: {e}")
 
     def entries(self):
         return self.feed["entries"]

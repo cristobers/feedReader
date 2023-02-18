@@ -23,13 +23,14 @@ def main():
 
     for feed in feeds:
         entries = FeedEntries.Feed(feed).entries()
+
         title = FeedEntries.Feed(feed).title()
 
         try:
             image = FeedEntries.Feed(feed).image()
         except AttributeError:
             image = None
-
+        print("Gathering articles...")
         importNewArticesToDatabase(article, cur, entries, title, image, con)
 
 if __name__ == '__main__':
