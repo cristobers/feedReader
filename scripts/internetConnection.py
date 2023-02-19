@@ -1,11 +1,10 @@
 import subprocess
 
 def connectionIsWorking():
-    p = subprocess.Popen(["ping", "-c1", "1.1.1.1"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p = subprocess.Popen(["ping", "-c", "1", "1.1.1.1", "-w1"], stdout=subprocess.PIPE)
     p.wait()
 
     if p.returncode == 0:
-        return True 
+        return True
 
-    print("Failed to ping Google, assuming that there's no internet connection.")
     return False

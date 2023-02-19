@@ -30,8 +30,8 @@ def main():
             image = FeedEntries.Feed(feed).image()
         except AttributeError:
             image = None
-        print("Gathering articles...")
         importNewArticesToDatabase(article, cur, entries, title, image, con)
+    print("Finished pulling articles.")
 
 if __name__ == '__main__':
     main()

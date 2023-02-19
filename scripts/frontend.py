@@ -13,11 +13,9 @@ def getArticles():
 @app.route("/")
 def index():
 
-    if connectionIsWorking:
-        print("Ping to 1.1.1.1 successful, internet is working")
+    if connectionIsWorking():
+        print("Ping succeeded, pulling articles...")
         gatherArticles.main()
-    else:
-        print("Ping to 1.1.1.1 failed, assuming there is no internet connection.")
 
     articles = getArticles()
     return render_template('index.html', articles=articles) 

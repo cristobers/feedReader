@@ -9,11 +9,6 @@
                 background-color: rgb(46, 46, 46);
             }
 
-            .summary-text {
-                color:rgb(225, 225, 225) !important;
-                font-family:Arial, Helvetica, sans-serif;
-            }
-
             .title-text {
                 text-decoration: none !important;
                 font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -27,11 +22,29 @@
                 font-size:small;
             }
 
+            /* This is for when the Summary text has no HTML elements. */
+            .summary-text {
+                color:rgb(225, 225, 225) !important;
+                font-family:Arial, Helvetica, sans-serif;
+            }
+            /* ####################################################### */
+
+            /* These are for when the Summary text has HTML elements. */
+            a {
+                font-family:Verdana, Geneva, Tahoma, sans-serif;
+                color: white;
+            }
+
+            p {
+                font-family:Verdana, Geneva, Tahoma, sans-serif;
+                color: white;
+            }
+            /* ####################################################### */
+
             a:hover {
                 text-decoration: none;
             }
             
-
             .articles {
                 margin: auto;
                 border-radius: 12px;
