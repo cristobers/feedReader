@@ -11,7 +11,7 @@ class Feed:
         try:
             self.feed = feedparser.parse(url)
         except Exception as e:
-            print(f"An error occured when trying to gather articles: {e}")
+            print(f"An error occured when trying to gather articles: {e}")  
 
     def entries(self):
         return self.feed["entries"]
