@@ -46,11 +46,8 @@
             }
             
             .articles {
-                margin: auto;
-                border-radius: 12px;
-                background: #212121;
+                outline: 1px solid rgb(33,33,33); 
                 padding: 2%;
-                width: 80%;
             }
 
             .articles:hover {
@@ -58,12 +55,14 @@
             }
             
             details > summary {
-                list-style-type: '▶️';
+                list-style-type: ' ';
                 text-align: center;
+                background-color: rgb(39, 39, 39);
             }
 
             details[open] > summary {
-                list-style-type: '🔽';
+                list-style-type: ' ';
+                background-color: rgb(39, 39, 39);
             }
 
             .floater {
@@ -78,23 +77,25 @@
         </style>
     </head>
     <body>
-        <a class="floater"> 🔄 </a>
+            {% if settings.hide_refresh_button == 'False' %}
+                <a class="floater"> 🔄 </a>
+            {% endif %}
 
-        {% for item in articles %}
-        <div class="articles">
-            <a href ="{{ item[4] }}" target="_blank" rel="noopener noreferrer" class="title-text" >{{ item[0] }}</a>
+            {% for item in articles %}
+            <div class="articles">
+                <a href ="{{ item[4] }}" target="_blank" rel="noopener noreferrer" class="title-text" >{{ item[0] }}</a>
+                <br>
+                <a class="bottom-text"> {{ item[5] }} / </a>
+                <a class="bottom-text"> {{ item[1] }}   </a> 
+                <details>
+                    <summary>
+                    </summary>
+                        <p class="summary-text" target="_blank" rel="noopener noreferrer">
+                            {{ item[3]|safe }}
+                        </p>
+                </details>
+            </div>
             <br>
-            <a class="bottom-text"> {{ item[5] }} / </a>
-            <a class="bottom-text"> {{ item[1] }}   </a> 
-            <details>
-                <summary>
-                </summary>
-                    <p class="summary-text" target="_blank" rel="noopener noreferrer">
-                        {{ item[3]|safe }}
-                    </p>
-            </details>
-        </div>
-        <br>
-        {% endfor %}
+            {% endfor %}
     </body>
 </html>

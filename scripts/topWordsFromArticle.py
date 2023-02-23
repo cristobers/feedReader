@@ -1,7 +1,7 @@
-# this is just a test for now,
-# it may be a good idea to append the top 12 or so words to the database
-# so that we're not requesting a new count of words each time
-# the websites we're gathering from will thank us :)
+# we can append to the database as a space seperated 
+# string, after which we can then use .split() to 
+# make an array, which can be iterated through 
+# within Jinja (within frontend.py)
 
 from collections import Counter
 from urllib.request import urlopen 
@@ -18,11 +18,8 @@ def getWebpageText(url):
     return data.lower()
 
 def getMostFrequentWords(url, count):
-    gramaticalArticles = ["i","-","the", "and", "a", "is", "they", "i\'m", "them", "he", "him", "she", "her", "you", ")", "(", ",", "for", "my", "are", "though", "that", "also", "using"]
+    unwantedWords = ["i","-","the", "and", "a", "is", "they", "i\'m", "them", "he", "him", "she", "her", "you", ")", "(", ",", "for", "my", "are", "though", "that", "also", "using", "an"]
     words = getWebpageText(url).split()
-    words = [i for i in words if i not in gramaticalArticles]
+    words = [i for i in words if i not in unwantedWords]
     words = Counter(words).most_common()
-    return ", ".join(list(zip(*words))[0][:count])
-
-def main(url, count):
-    print(getMostFrequentWords(url, count))
+    return " ".join(list(zip(*words))[0][:count])

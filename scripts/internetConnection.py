@@ -6,5 +6,4 @@ def connectionIsWorking():
 
     if p.returncode == 0:
         return True
-
     return False

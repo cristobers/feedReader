@@ -7,13 +7,12 @@ def importNewArticesToDatabase(article, cur, entries, title, image, con):
                 str(article(entry).summary()), str(article(entry).link()), 
                 str(article(entry).dayPublished()), str(article(entry).timePublished()))
             cur.execute("INSERT OR IGNORE INTO articles(articleTitle, webpageTitle, image, summary, link, dayPublished, timePublished) VALUES(?,?,?,?,?,?,?)", data)
-        except sqlite3.OperationalError as e:
-            print(f"{e}")
+        except Exception as e:
+            print(f"An error has occurred: {e} within {entry}\nthis could be due to a lack of one of the fields.\n{data}\nThis is usually safe to ignore.")
             pass
     con.commit()
 
 def main():
-
     with open("../Feeds.txt", "r") as file:
         feeds = [feed.strip() for feed in file]
 
@@ -23,7 +22,6 @@ def main():
 
     for feed in feeds:
         entries = FeedEntries.Feed(feed).entries()
-
         title = FeedEntries.Feed(feed).title()
 
         try:
