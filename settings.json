@@ -1,4 +1,6 @@
 {
     "check_for_articles_on_refresh" : "True",
-    "hide_refresh_button" : "True"
+    "hide_refresh_button" : "True",
+    "refresh_feeds_interval_in_seconds" : "600",
+    "auto_refresh_feeds": "True"
 }

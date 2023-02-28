@@ -13,13 +13,18 @@ def getWebpage(url):
     return bs4
 
 def getWebpageText(url):
+    parsedText = []
     text = getWebpage(url).find_all("p")
-    data = "".join([i.get_text() for i in text])
-    return data.lower()
+    # data = parsedText.append([i.get_text().split() for i in text])
+    data = parsedText.append([i.get_text() for i in text])
+    return parsedText
 
-def getMostFrequentWords(url, count):
-    unwantedWords = ["i","-","the", "and", "a", "is", "they", "i\'m", "them", "he", "him", "she", "her", "you", ")", "(", ",", "for", "my", "are", "though", "that", "also", "using", "an"]
-    words = getWebpageText(url).split()
-    words = [i for i in words if i not in unwantedWords]
-    words = Counter(words).most_common()
-    return " ".join(list(zip(*words))[0][:count])
+# this returns the sentences instead of just the words, ideally these setneces can be parsed through soem kind of sentiment analysis 
+# which will tell us if the article is positive, neutral, or negative. 
+
+# def getMostFrequentWords(url, count):
+#     unwantedWords = ["to","of","in","i","-","the", "and", "a", "is", "they", "i\'m", "them", "he", "him", "she", "her", "you", ")", "(", ",", "for", "my", "are", "though", "that", "also", "using", "an"]
+#     words = getWebpageText(url).split()
+#     words = [i for i in words if i not in unwantedWords]
+#     words = Counter(words).most_common()
+#     return " ".join(list(zip(*words))[0][:count])
