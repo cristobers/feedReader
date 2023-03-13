@@ -1,82 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!--<h1>feedReader - RSS Feed Reader</h1>-->
         <title>feedReader - RSS Feed Reader</title>
-        <style>
-            
-            body {
-                background-color: rgb(46, 46, 46);
-            }
-
-            .title-text {
-                text-decoration: none !important;
-                font-family:Verdana, Geneva, Tahoma, sans-serif;
-                color: white;
-            }
-
-            .bottom-text{
-                text-decoration: none !important;
-                font-family:Verdana, Geneva, Tahoma, sans-serif;
-                color: rgb(225, 225, 225);
-                font-size:small;
-            }
-
-            /* This is for when the Summary text has no HTML elements. */
-            .summary-text {
-                color:rgb(225, 225, 225) !important;
-                font-family:Arial, Helvetica, sans-serif;
-            }
-            /* ####################################################### */
-
-            /* These are for when the Summary text has HTML elements. */
-            a {
-                font-family:Verdana, Geneva, Tahoma, sans-serif;
-                color: white;
-            }
-
-            p {
-                font-family:Verdana, Geneva, Tahoma, sans-serif;
-                color: white;
-            }
-            /* ####################################################### */
-
-            a:hover {
-                text-decoration: none;
-            }
-            
-            .articles {
-                outline: 1px solid rgb(33,33,33); 
-                padding: 2%;
-            }
-
-            .articles:hover {
-                background: #333333;
-            }
-            
-            details > summary {
-                list-style-type: ' ';
-                text-align: center;
-                background-color: rgb(39, 39, 39);
-            }
-
-            details[open] > summary {
-                list-style-type: ' ';
-                background-color: rgb(39, 39, 39);
-            }
-
-            .floater {
-                position: fixed;
-                font-size: 40px;
-                padding-left:  10px;
-                padding-right: 10px;
-                right: 30px;
-                bottom: 20px;
-            }
-
-        </style>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
-    <body>
+    <script>
+        function getAmount()
+        {
+            let length = document.getElementsByClassName("articles").length;
+            
+            let div = document.getElementById("articleAmount");
+            let p = document.createElement('p');
+            p.className = "bottom-text";
+            let content = document.createTextNode(length.toString() + " articles currently loaded.");
+
+            p.appendChild(content);
+            div.appendChild(p);
+        }
+    </script>
+
+    <body onload="getAmount()">
+        <div id="articleAmount"></div>
+
         {% if settings.auto_refresh_feeds == 'True' %}
             {% set time = settings.refresh_feeds_interval_in_seconds %}
             <meta http-equiv="refresh" content="{{ time }}">
@@ -97,6 +42,7 @@
                 </summary>
                     <p class="summary-text" target="_blank" rel="noopener noreferrer">
                         {{ item[3]|safe }}
+                        <br>
                     </p>
             </details>
         </div>

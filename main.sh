@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 cd scripts
 
 if [ ! -f feeds.db ]; then

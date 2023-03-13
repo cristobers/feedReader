@@ -8,23 +8,22 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 def getWebpage(url):
-    html = urlopen(url)
+    html = urlopen(url, timeout=5)
     bs4 = BeautifulSoup(html.read(), "html.parser")
     return bs4
 
-def getWebpageText(url):
-    parsedText = []
+def getWordsFromWebpage(url):
     text = getWebpage(url).find_all("p")
-    # data = parsedText.append([i.get_text().split() for i in text])
-    data = parsedText.append([i.get_text() for i in text])
-    return parsedText
+    a = ''.join([i.get_text() for i in text])
+    return a
 
-# this returns the sentences instead of just the words, ideally these setneces can be parsed through soem kind of sentiment analysis 
-# which will tell us if the article is positive, neutral, or negative. 
+def getMostFrequentWords(url, count=None) -> str:
+    words = getWordsFromWebpage(url).split()
+    words = [word for word in words if word[0].isupper() and len(word) > 2 and word not in ("This", "The", "And", "Then", "For", "None")]
+    words = Counter(words).most_common()
+    
+    print(f"Gathering the most frequent words for {url}")
 
-# def getMostFrequentWords(url, count):
-#     unwantedWords = ["to","of","in","i","-","the", "and", "a", "is", "they", "i\'m", "them", "he", "him", "she", "her", "you", ")", "(", ",", "for", "my", "are", "though", "that", "also", "using", "an"]
-#     words = getWebpageText(url).split()
-#     words = [i for i in words if i not in unwantedWords]
-#     words = Counter(words).most_common()
-#     return " ".join(list(zip(*words))[0][:count])
+    if count != None:
+        return " ".join(list(zip(*words))[0][:count])
+    return " ".join(list(zip(*words))[0])

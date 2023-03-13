@@ -1,9 +1,11 @@
-import sqlite3, gatherArticles
+import sqlite3, gatherArticles, topWordsFromArticle
 from json import load
 from internetConnection import connectionIsWorking
+from urllib.request import urlopen 
 from flask import Flask, render_template
 
 app = Flask(__name__)
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 def checkSettings():
     f = open("../settings.json")
