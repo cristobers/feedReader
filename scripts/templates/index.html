@@ -2,23 +2,10 @@
 <html lang="en">
     <head>
         <title>feedReader - RSS Feed Reader</title>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <script src="{{url_for('static', filename='frontend-scripts.js')}}"></script>
     </head>
-    <script>
-        function getAmount()
-        {
-            let length = document.getElementsByClassName("articles").length;
-            
-            let div = document.getElementById("articleAmount");
-            let p = document.createElement('p');
-            p.className = "bottom-text";
-            let content = document.createTextNode(length.toString() + " articles currently loaded.");
-
-            p.appendChild(content);
-            div.appendChild(p);
-        }
-    </script>
-
     <body onload="getAmount()">
         <div id="articleAmount"></div>
 
@@ -30,6 +17,24 @@
         {% if settings.hide_refresh_button == 'False' %}
             <a class="floater" href="http://127.0.0.1:5000/"> 🔄 </a>
         {% endif %}
+
+        <label for="sortSelection" class="bottom-text">Articles by:</label>
+
+        <select name="sortSelection" id="sortSelection">
+            <option>All</option>
+            <!-- 
+                For this to work, we'll have to visit an endpoint that tells flask
+                which option within the dropdown is set, then we'll have to set a
+                variable or file that's readable everywhere, to tell the feed reader to
+                change the SQL query that contains what to select.
+
+                dropdown select -> ENDPOINT:changesort/ -> change SQL -> refresh index
+                with new SQL
+            -->
+            {% for title in uniqueTitles %}
+                <option>{{ title }}</option>
+            {% endfor  %}
+        </select>
 
         {% for item in articles %}
         <div class="articles">
@@ -47,7 +52,6 @@
             </details>
         </div>
         <br>
-        {% endfor %}
-        
+        {% endfor %}  
     </body>
 </html>

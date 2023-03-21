@@ -7,7 +7,7 @@ def importNewArticesToDatabase(article, cur, entries, title, image, con):
                     article(entry).summary(), article(entry).link(), 
                     article(entry).dayPublished(), article(entry).timePublished())
             
-            map(str, data) # making sure every element of data is a string
+            # map(str, data) # making sure every element of data is a string
 
             cur.execute("""INSERT OR IGNORE INTO 
                            articles(articleTitle, webpageTitle, image, summary, link, dayPublished, timePublished) 
@@ -27,7 +27,10 @@ def main():
 
     for feed in feeds:
         entries = FeedEntries.Feed(feed).entries()
-        title = FeedEntries.Feed(feed).title()
+        try:
+            title = FeedEntries.Feed(feed).title()
+        except:
+            title = None
 
         try:
             image = FeedEntries.Feed(feed).image()
