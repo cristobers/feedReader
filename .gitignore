@@ -1,6 +1,7 @@
 # We don't need the pycache folders.
 __pycache__/
 scripts/__pycache__/
+*.swp
 
 # Users create their own feeds.db file on first run.
 feeds.db
